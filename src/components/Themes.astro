@@ -1,0 +1,314 @@
+---
+const themes = [
+  { name: 'Default', desc: 'Clean and bright', color: '#f8fafc', textColor: '#1e293b' },
+  { name: 'Dark', desc: 'Easy on the eyes', color: '#1e293b', textColor: '#f1f5f9' },
+  { name: 'Christmas', desc: 'Festive with snowfall', color: '#1a472a', textColor: '#fbbf24' },
+  { name: 'Midnight', desc: 'Deep purple elegance', color: '#1e1033', textColor: '#c084fc' },
+  { name: 'Ocean', desc: 'Cool cyan tones', color: '#0c1f2e', textColor: '#22d3ee' },
+];
+---
+
+<section class="themes" id="themes">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Themes</span>
+      <h2 class="section-title">Your tracker, your style.</h2>
+      <p class="section-subtitle">
+        5 handcrafted themes that persist across sessions. Switch anytime from Settings.
+      </p>
+    </div>
+    <div class="themes-showcase">
+      {themes.map((theme) => (
+        <div class="theme-chip" style={`--chip-bg: ${theme.color}; --chip-text: ${theme.textColor};`}>
+          <div class="chip-preview">
+            <div class="chip-bar">
+              <div class="chip-dots">
+                <span></span><span></span><span></span>
+              </div>
+            </div>
+            <div class="chip-body">
+              <div class="chip-sidebar">
+                <div class="chip-nav-item active"></div>
+                <div class="chip-nav-item"></div>
+                <div class="chip-nav-item"></div>
+              </div>
+              <div class="chip-main">
+                <div class="chip-stat"></div>
+                <div class="chip-stat"></div>
+                <div class="chip-rows">
+                  <div class="chip-row"></div>
+                  <div class="chip-row"></div>
+                  <div class="chip-row"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="chip-info">
+            <span class="chip-name">{theme.name}</span>
+            <span class="chip-desc">{theme.desc}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+    <div class="themes-extra">
+      <div class="extra-card">
+        <div class="extra-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        </div>
+        <h3>Mobile Responsive</h3>
+        <p>Optimized for every screen size with a hamburger menu navigation on mobile devices.</p>
+      </div>
+      <div class="extra-card">
+        <div class="extra-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <h3>Data Export</h3>
+        <p>Export your subscriptions as CSV, JSON, or iCal. Your data is always portable and accessible.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .themes {
+    padding: 8rem 0;
+    position: relative;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+  }
+
+  .section-tag {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--secondary);
+    background: var(--secondary-glow);
+    padding: 0.35rem 0.85rem;
+    border-radius: 6px;
+    margin-bottom: 1.25rem;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+
+  .section-subtitle {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  .themes-showcase {
+    display: flex;
+    gap: 1.25rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+  }
+
+  .theme-chip {
+    width: 200px;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-card);
+    transition: all 0.3s ease;
+  }
+
+  .theme-chip:hover {
+    transform: translateY(-4px);
+    border-color: var(--text-muted);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  }
+
+  .chip-preview {
+    height: 130px;
+    background: var(--chip-bg);
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .chip-bar {
+    height: 14px;
+    background: rgba(128, 128, 128, 0.15);
+    border-radius: 4px 4px 0 0;
+    display: flex;
+    align-items: center;
+    padding: 0 6px;
+  }
+
+  .chip-dots {
+    display: flex;
+    gap: 3px;
+  }
+
+  .chip-dots span {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--chip-text);
+    opacity: 0.4;
+  }
+
+  .chip-body {
+    flex: 1;
+    display: flex;
+    gap: 4px;
+  }
+
+  .chip-sidebar {
+    width: 30px;
+    background: rgba(128, 128, 128, 0.1);
+    border-radius: 4px;
+    padding: 6px 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .chip-nav-item {
+    height: 4px;
+    border-radius: 2px;
+    background: rgba(128, 128, 128, 0.2);
+  }
+
+  .chip-nav-item.active {
+    background: var(--chip-text);
+    opacity: 0.6;
+  }
+
+  .chip-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .chip-stat {
+    height: 16px;
+    background: rgba(128, 128, 128, 0.12);
+    border-radius: 4px;
+  }
+
+  .chip-stat:first-child {
+    width: 60%;
+  }
+
+  .chip-rows {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .chip-row {
+    height: 8px;
+    background: rgba(128, 128, 128, 0.08);
+    border-radius: 3px;
+  }
+
+  .chip-info {
+    padding: 0.85rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .chip-name {
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+
+  .chip-desc {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  .themes-extra {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .extra-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 16px;
+    padding: 2rem;
+    transition: all 0.3s;
+  }
+
+  .extra-card:hover {
+    border-color: var(--border-accent);
+  }
+
+  .extra-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: var(--accent-glow);
+    color: var(--accent-bright);
+    margin-bottom: 1rem;
+  }
+
+  .extra-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+  }
+
+  .extra-card p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 900px) {
+    .themes-showcase {
+      gap: 1rem;
+    }
+
+    .theme-chip {
+      width: 160px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .themes-showcase {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .theme-chip {
+      width: 100%;
+      max-width: 280px;
+    }
+
+    .themes-extra {
+      grid-template-columns: 1fr;
+    }
+
+    .themes {
+      padding: 5rem 0;
+    }
+  }
+</style>

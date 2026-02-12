@@ -1,0 +1,359 @@
+---
+---
+
+<section class="quickstart" id="quickstart">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Get Started</span>
+      <h2 class="section-title">Up and running in<br />under a minute.</h2>
+      <p class="section-subtitle">
+        No external database, no complex config. Just Docker and go.
+      </p>
+    </div>
+
+    <div class="tabs" id="install-tabs">
+      <div class="tab-buttons">
+        <button class="tab-btn active" data-tab="compose">Docker Compose</button>
+        <button class="tab-btn" data-tab="docker">Docker Run</button>
+        <button class="tab-btn" data-tab="source">From Source</button>
+      </div>
+
+      <div class="tab-panel active" data-panel="compose">
+        <div class="step">
+          <span class="step-num">1</span>
+          <span class="step-text">Create a <code>docker-compose.yml</code>:</span>
+        </div>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">yaml</span>
+            <span class="code-file">docker-compose.yml</span>
+          </div>
+          <pre><code>version: '3.8'
+
+services:
+  subtrackr:
+    image: ghcr.io/bscott/subtrackr:latest
+    container_name: subtrackr
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./data:/app/data
+    environment:
+      - GIN_MODE=release
+      - DATABASE_PATH=/app/data/subtrackr.db
+    restart: unless-stopped</code></pre>
+        </div>
+        <div class="step">
+          <span class="step-num">2</span>
+          <span class="step-text">Start it up:</span>
+        </div>
+        <div class="code-block compact">
+          <pre><code>docker-compose up -d</code></pre>
+        </div>
+        <div class="step">
+          <span class="step-num">3</span>
+          <span class="step-text">Open <code>http://localhost:8080</code> and start tracking.</span>
+        </div>
+      </div>
+
+      <div class="tab-panel" data-panel="docker">
+        <div class="step">
+          <span class="step-num">1</span>
+          <span class="step-text">Run a single command:</span>
+        </div>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">bash</span>
+          </div>
+          <pre><code>docker run -d \
+  --name subtrackr \
+  -p 8080:8080 \
+  -v $(pwd)/data:/app/data \
+  -e GIN_MODE=release \
+  ghcr.io/bscott/subtrackr:latest</code></pre>
+        </div>
+        <div class="step">
+          <span class="step-num">2</span>
+          <span class="step-text">Open <code>http://localhost:8080</code>. That's it.</span>
+        </div>
+      </div>
+
+      <div class="tab-panel" data-panel="source">
+        <div class="step">
+          <span class="step-num">1</span>
+          <span class="step-text">Clone and build:</span>
+        </div>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">bash</span>
+          </div>
+          <pre><code>git clone https://github.com/bscott/subtrackr.git
+cd subtrackr
+go mod download
+go run cmd/server/main.go</code></pre>
+        </div>
+        <div class="step">
+          <span class="step-num">2</span>
+          <span class="step-text">Requires Go 1.21+. Open <code>http://localhost:8080</code>.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="deploy-targets">
+      <p class="deploy-label">Also runs on:</p>
+      <div class="deploy-chips">
+        <span class="deploy-chip">Portainer</span>
+        <span class="deploy-chip">Proxmox LXC</span>
+        <span class="deploy-chip">Unraid</span>
+        <span class="deploy-chip">Synology NAS</span>
+        <span class="deploy-chip">Any Docker host</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const btns = document.querySelectorAll('.tab-btn');
+    const panels = document.querySelectorAll('.tab-panel');
+
+    btns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tab = btn.getAttribute('data-tab');
+        btns.forEach(b => b.classList.remove('active'));
+        panels.forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.querySelector(`[data-panel="${tab}"]`)?.classList.add('active');
+      });
+    });
+  });
+</script>
+
+<style>
+  .quickstart {
+    padding: 8rem 0;
+    position: relative;
+  }
+
+  .quickstart::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+  }
+
+  .section-tag {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    background: var(--accent-glow);
+    padding: 0.35rem 0.85rem;
+    border-radius: 6px;
+    margin-bottom: 1.25rem;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+
+  .section-subtitle {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  .tabs {
+    max-width: 700px;
+    margin: 0 auto 3rem;
+  }
+
+  .tab-buttons {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    background: var(--bg-card);
+    padding: 0.35rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-subtle);
+  }
+
+  .tab-btn {
+    flex: 1;
+    padding: 0.65rem 1rem;
+    background: transparent;
+    border: none;
+    border-radius: 9px;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .tab-btn:hover {
+    color: var(--text-secondary);
+  }
+
+  .tab-btn.active {
+    background: var(--bg-surface);
+    color: var(--accent-bright);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .tab-panel {
+    display: none;
+  }
+
+  .tab-panel.active {
+    display: block;
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .step {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+    margin-top: 1.5rem;
+  }
+
+  .step:first-child {
+    margin-top: 0;
+  }
+
+  .step-num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: var(--accent-glow);
+    color: var(--accent-bright);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  .step-text {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+  }
+
+  .step-text code {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--accent-bright);
+    background: var(--accent-glow);
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+  }
+
+  .code-block {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .code-block.compact {
+    margin-bottom: 0.5rem;
+  }
+
+  .code-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid var(--border-subtle);
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  .code-lang {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+  }
+
+  .code-file {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--accent);
+  }
+
+  .code-block pre {
+    padding: 1rem 1.25rem;
+    overflow-x: auto;
+  }
+
+  .code-block code {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    line-height: 1.65;
+    color: var(--text-secondary);
+  }
+
+  .deploy-targets {
+    text-align: center;
+  }
+
+  .deploy-label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .deploy-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+
+  .deploy-chip {
+    padding: 0.4rem 0.85rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 100px;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+  }
+
+  @media (max-width: 600px) {
+    .quickstart {
+      padding: 5rem 0;
+    }
+
+    .tab-buttons {
+      flex-direction: column;
+    }
+  }
+</style>

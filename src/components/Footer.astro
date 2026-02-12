@@ -1,0 +1,160 @@
+---
+const base = import.meta.env.BASE_URL;
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <img src={`${base}logo.svg`} alt="SubTrackr" class="logo-mark" width="32" height="32" />
+          <span class="logo-text">SubTrackr</span>
+        </div>
+        <p class="footer-tagline">Self-hosted subscription tracking.<br />Your data, your server.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Project</h4>
+          <a href="https://github.com/bscott/subtrackr" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://github.com/bscott/subtrackr/releases" target="_blank" rel="noopener">Releases</a>
+          <a href="https://github.com/bscott/subtrackr/issues" target="_blank" rel="noopener">Issues</a>
+          <a href="https://github.com/bscott/subtrackr/discussions" target="_blank" rel="noopener">Discussions</a>
+        </div>
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <a href="#features">Features</a>
+          <a href="#quickstart">Quick Start</a>
+          <a href="https://github.com/bscott/subtrackr#-api-documentation" target="_blank" rel="noopener">API Docs</a>
+          <a href="https://github.com/bscott/subtrackr#-mcp-server-ai-integration" target="_blank" rel="noopener">MCP Server</a>
+        </div>
+        <div class="footer-col">
+          <h4>Deploy</h4>
+          <a href="https://github.com/bscott/subtrackr#-deployment-guides" target="_blank" rel="noopener">Portainer</a>
+          <a href="https://github.com/bscott/subtrackr#-deployment-guides" target="_blank" rel="noopener">Proxmox</a>
+          <a href="https://github.com/bscott/subtrackr#-deployment-guides" target="_blank" rel="noopener">Unraid</a>
+          <a href="https://github.com/bscott/subtrackr#-deployment-guides" target="_blank" rel="noopener">Synology</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">
+        Licensed under <a href="https://github.com/bscott/subtrackr/blob/main/LICENSE" target="_blank" rel="noopener">AGPL-3.0</a>.
+        Built with Go, HTMX, and Tailwind CSS.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid var(--border-subtle);
+    padding: 4rem 0 2rem;
+  }
+
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    gap: 4rem;
+    margin-bottom: 3rem;
+  }
+
+  .footer-brand {
+    max-width: 280px;
+  }
+
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .logo-mark {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+  }
+
+  .logo-text {
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: -0.02em;
+  }
+
+  .footer-tagline {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 4rem;
+  }
+
+  .footer-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .footer-col h4 {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-secondary);
+    margin-bottom: 0.35rem;
+  }
+
+  .footer-col a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.2s;
+  }
+
+  .footer-col a:hover {
+    color: var(--accent-bright);
+  }
+
+  .footer-bottom {
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .footer-copy {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-align: center;
+  }
+
+  .footer-copy a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-copy a:hover {
+    color: var(--accent-bright);
+  }
+
+  @media (max-width: 768px) {
+    .footer-inner {
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    .footer-links {
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .footer-links {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+  }
+</style>
